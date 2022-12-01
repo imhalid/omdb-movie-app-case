@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { useEffect, useState } from "react";
 
 export default function Home() {
@@ -12,7 +13,6 @@ export default function Home() {
       setMovies(data.Search);
     }
   };
-
   useEffect(() => {
     getMovies();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -34,6 +34,7 @@ export default function Home() {
         <div key={movie.imdbID}>
           <h1>{movie.Title}</h1>
           <img src={movie.Poster} alt={movie.Title} />
+          <Link href={`/movies/${movie.imdbID}`}>Go To Movie</Link>
         </div>
       ))}
 
