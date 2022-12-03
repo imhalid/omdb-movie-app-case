@@ -1,6 +1,6 @@
 export const getStaticPaths = async () => {
   const response = await fetch(
-    `http://www.omdbapi.com/?apikey=83d16d20&s=star`
+    `http://www.omdbapi.com/?apikey=83d16d20&s=batman`
   );
   const data = await response.json();
   const paths = data.Search.map((movie) => {
@@ -15,6 +15,7 @@ export const getStaticPaths = async () => {
 };
 
 export const getStaticProps = async (context) => {
+  console.log(context);
   const id = context.params.id;
   const response = await fetch(
     `http://www.omdbapi.com/?apikey=83d16d20&i=${id}`
@@ -28,24 +29,6 @@ export const getStaticProps = async (context) => {
 export default function Movie(params) {
   console.log(params);
   const movie = params.movie;
-
-  // const API = `http://www.omdbapi.com/?apikey=83d16d20`;
-  // const [movies, setMovies] = useState([]);
-  // const [searchValue, setSearchValue] = useState("star");
-
-  // const getMovies = async () => {
-  //   const response = await fetch(`${API}&s=${searchValue}`);
-  //   const data = await response.json();
-  //   if (data.Search) {
-  //     setMovies(data.Search);
-  //   }
-  // };
-  // useEffect(() => {
-  //   getMovies();
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [searchValue]);
-  // console.log(movies);
-
   return (
     <div>
       <h1>Movie</h1>
