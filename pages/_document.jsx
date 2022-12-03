@@ -12,9 +12,8 @@ export default function Document() {
         />
       </Head>
       <body
-        className="dark:bg-gray-300 bg-neutral-100 h-screen
+        className="bg-hero-pattern bg-cover bg-center bg-no-repeat bg-slate-900  h-screen
        selection:bg-blue-100/30 selection:text-blue-500
-       dark:selection:bg-blue-300/10 dark:selection:text-blue-400
        "
       >
         <Main />

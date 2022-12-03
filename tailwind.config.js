@@ -9,6 +9,9 @@ module.exports = {
       aspectRatio: {
         "3/4": "3 / 4",
       },
+      backgroundImage: {
+        "hero-pattern": "url('/Background.svg')",
+      },
     },
   },
   plugins: [],

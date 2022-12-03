@@ -2,7 +2,6 @@
 import { useRouter } from "next/router";
 import { useState } from "react";
 import useSWR from "swr";
-import Link from "next/link";
 
 export default function Home(props) {
   const [search, setSearch] = useState("");
@@ -10,7 +9,6 @@ export default function Home(props) {
   const [categories, setCategories] = useState([]);
   const [category, setCategory] = useState([]);
   const router = useRouter();
-  console.log(props);
   const [pageIndex, setPageIndex] = useState(1);
 
   const fetcher = (url) => fetch(url).then((res) => res.json());
@@ -19,36 +17,19 @@ export default function Home(props) {
     fetcher
   );
 
-  console.log(data);
-
   if (!data) return <div>failed to load</div>;
-
   return (
     <>
-      <div className="flex items-center justify-center">
+      <div className="flex items-center justify-center px-2">
         <div className="">
-          <div className="">
-            <form>
+          <form className="mt-10 flex flex-col items-center justify-center">
+            <div>
               <input
-                className="rounded-full px-2 py-1 border"
+                placeholder="Searcgh Movies or TV Shows"
+                className="rounded-md w-64 px-2 py-2 border"
                 type="text"
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
-              />
-              <input
-                value="movie"
-                type="checkbox"
-                onChange={(e) => setCategory(e.target.value)}
-              />
-              <input
-                value="series"
-                type="checkbox"
-                onChange={(e) => setCategory(e.target.value)}
-              />
-              <input
-                value="episode"
-                type="checkbox"
-                onChange={(e) => setCategory(e.target.value)}
               />
               <button
                 type="submit"
@@ -57,33 +38,74 @@ export default function Home(props) {
                   setSearchValue(search);
                   setCategories(category);
                 }}
-              >
-                Search
-              </button>
-            </form>
-          </div>
+              />
+            </div>
+
+            <div className="">
+              <input
+                id="movie"
+                name="category"
+                value="movie"
+                type="radio"
+                onChange={(e) => setCategory(e.target.value)}
+              />
+              <label htmlFor="movie">Movie</label>
+              <input
+                id="series"
+                name="category"
+                value="series"
+                type="radio"
+                onChange={(e) => setCategory(e.target.value)}
+              />
+              <label htmlFor="series">Series</label>
+              <input
+                id="episode"
+                name="category"
+                value="episode"
+                type="radio"
+                onChange={(e) => setCategory(e.target.value)}
+              />
+              <label htmlFor="episode">Episode</label>
+              <input
+                id="game"
+                name="category"
+                value="game"
+                type="radio"
+                onChange={(e) => setCategory(e.target.value)}
+              />
+              <label htmlFor="game">Game</label>
+            </div>
+          </form>
+
           <div>
-            <p>{data.totalResults}</p>
-            <div className="grid grid-cols-2">
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 mt-4">
               {data.Search &&
                 data.Search.filter((d) => {
                   if (categories.length === 0) {
-                    return d;
+                    return "some error";
                   } else if (categories.includes(d.Type)) {
                     return d;
                   }
                 }).map((movie) => (
-                  <div key={movie.imdbID}>
-                    <div className="">
-                      <p>{movie.Year}</p>
-                      <p>{movie.Type}</p>
-                      <img
-                        className="rounded-lg w-[300px] h-[420px] object-cover"
-                        src={movie.Poster}
-                        alt={movie.Title}
-                      />
-                      <h1>{movie.Title}</h1>
-                      <Link href={`/movies/${movie.imdbID}`}>Go To Movie</Link>
+                  <div key={movie.imdbID} className="sm:w-[200px] w-[180px]">
+                    <div className="bg-black/20 relative overflow-clip p-2 rounded-lg">
+                      <a href={`/movies/${movie.imdbID}`}>
+                        <img
+                          className=" blur-lg  absolute scale-150 -z-10 object-fill"
+                          src={movie.Poster}
+                          alt={movie.Title}
+                        />
+
+                        <img
+                          className="rounded-md shadow-md sm:w-[200px] w-[250px] sm:h-[250px] h-[220px] object-cover"
+                          src={movie.Poster}
+                          alt={movie.Title}
+                        />
+                        <h1 className="text-white drop-shadow-xl mt-4">
+                          {movie.Title}
+                        </h1>
+                        {/* <Link href={`/movies/${movie.imdbID}`}>Go To Movie</Link> */}
+                      </a>
                     </div>
                   </div>
                 ))}
