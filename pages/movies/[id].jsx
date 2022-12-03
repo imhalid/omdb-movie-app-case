@@ -1,48 +1,50 @@
-export const getStaticPaths = async () => {
-  const response = await fetch(
-    `http://www.omdbapi.com/?apikey=83d16d20&s=batman`
-  );
-  const data = await response.json();
-  const paths = data.Search.map((movie) => {
-    return {
-      params: { id: movie.imdbID },
-    };
-  });
-  return {
-    paths,
-    fallback: false,
-  };
-};
+/* eslint-disable react-hooks/rules-of-hooks */
+import { useRouter } from "next/router";
 
-export const getStaticProps = async (context) => {
-  console.log(context);
-  const id = context.params.id;
-  const response = await fetch(
-    `http://www.omdbapi.com/?apikey=83d16d20&i=${id}`
-  );
-  const data = await response.json();
-  return {
-    props: { movie: data },
-  };
-};
+export default function index(props) {
+  const router = useRouter();
 
-export default function Movie(params) {
-  console.log(params);
-  const movie = params.movie;
+  console.log(props);
+  if (router.isFallback) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <div>
-      <h1>Movie</h1>
-      <h1>{movie.Title}</h1>
-      <img src={movie.Poster} alt={movie.Title} />
-      <h1>{movie.Actors}</h1>
-      <h1>{movie.Plot}</h1>
-      <h1>{movie.Writer}</h1>
-      <h1>{movie.Director}</h1>
-      <h1>{movie.Genre}</h1>
-      <h1>{movie.Released}</h1>
-      <h1>{movie.Runtime}</h1>
-      <h1>{movie.imdbRating}</h1>
-      <h1>{movie.imdbVotes}</h1>
+      {props.Actors}
+      <p>{props.Title}</p>
+      <p>{props.Year}</p>
+      <p>{props.Plot}</p>
+      <p>{props.Director}</p>
+      <p>{props.Genre}</p>
+      <p>{props.Language}</p>
+      <p>{props.Country}</p>
+      <p>{props.Awards}</p>
+      <p>{props.imdbRating}</p>
+      <p>{props.imdbVotes}</p>
+      <p>{props.imdbID}</p>
+      <p>{props.Type}</p>
+      <p>{props.DVD}</p>
+      <img src={props.Poster} alt={props.Title} />
     </div>
   );
+}
+
+export async function getStaticPaths() {
+  const res = await fetch(`http://www.omdbapi.com/?apikey=83d16d20&s=yoyo`);
+  const data = await res.json();
+  return {
+    paths: data.Search.map((d) => ({ params: { id: d.imdbID } })),
+    fallback: "blocking",
+  };
+}
+
+export async function getStaticProps({ params }) {
+  const res = await fetch(
+    `http://www.omdbapi.com/?apikey=83d16d20&i=${params.id}`
+  );
+  const data = await res.json();
+  return {
+    props: data,
+  };
 }

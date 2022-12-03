@@ -1,32 +1,17 @@
 /* eslint-disable @next/next/no-img-element */
-import Link from "next/link";
-import useSWR from "swr";
 import { useRouter } from "next/router";
+import { useState } from "react";
+import useSWR from "swr";
+import Link from "next/link";
 
-import { useEffect, useState } from "react";
-
-export default function Home() {
-  const [pageIndex, setPageIndex] = useState(1);
-  // const [movies, setMovies] = useState([]);
-  const [searchValue, setSearchValue] = useState("batman");
+export default function Home(props) {
   const [search, setSearch] = useState("");
-
+  const [searchValue, setSearchValue] = useState("transformers");
+  const [categories, setCategories] = useState([]);
+  const [category, setCategory] = useState([]);
   const router = useRouter();
-  const id = router.query.id;
-
-  // const getMovies = async () => {
-  //   const response = await fetch(
-  //     `http://www.omdbapi.com/?apikey=83d16d20&s=${searchValue}`
-  //   );
-  //   const data = await response.json();
-  //   if (data.Search) {
-  //     setMovies(data.Search);
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   getMovies();
-  // }, [searchValue]);
+  console.log(props);
+  const [pageIndex, setPageIndex] = useState(1);
 
   const fetcher = (url) => fetch(url).then((res) => res.json());
   const { data } = useSWR(
@@ -34,56 +19,82 @@ export default function Home() {
     fetcher
   );
 
+  console.log(data);
+
   if (!data) return <div>failed to load</div>;
 
   return (
-    <div className="text-lg text-blue-600">
-      <h1>Home</h1>
-      <form>
-        <input
-          type="text"
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-        />
-        <button
-          type="submit"
-          onClick={(e) => {
-            e.preventDefault();
-            setSearchValue(search);
-            console.log(searchValue);
-          }}
-        >
-          Search
-        </button>
-      </form>
-      <div>
-        {data.Search &&
-          data.Search.map((movie) => (
-            <div key={movie.imdbID}>
-              <h1>{movie.Title}</h1>
-              <img
-                src={movie.Poster}
-                width="200"
-                height="500"
-                alt={movie.Title}
+    <>
+      <div className="flex items-center justify-center">
+        <div className="">
+          <div className="">
+            <form>
+              <input
+                className="rounded-full px-2 py-1 border"
+                type="text"
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
               />
-              <Link href={`/movies/${movie.imdbID}`}>Go To Movie</Link>
+              <input
+                value="movie"
+                type="checkbox"
+                onChange={(e) => setCategory(e.target.value)}
+              />
+              <input
+                value="series"
+                type="checkbox"
+                onChange={(e) => setCategory(e.target.value)}
+              />
+              <input
+                value="episode"
+                type="checkbox"
+                onChange={(e) => setCategory(e.target.value)}
+              />
+              <button
+                type="submit"
+                onClick={(e) => {
+                  e.preventDefault();
+                  setSearchValue(search);
+                  setCategories(category);
+                }}
+              >
+                Search
+              </button>
+            </form>
+          </div>
+          <div>
+            <p>{data.totalResults}</p>
+            <div className="grid grid-cols-2">
+              {data.Search &&
+                data.Search.filter((d) => {
+                  if (categories.length === 0) {
+                    return d;
+                  } else if (categories.includes(d.Type)) {
+                    return d;
+                  }
+                }).map((movie) => (
+                  <div key={movie.imdbID}>
+                    <div className="">
+                      <p>{movie.Year}</p>
+                      <p>{movie.Type}</p>
+                      <img
+                        className="rounded-lg w-[300px] h-[420px] object-cover"
+                        src={movie.Poster}
+                        alt={movie.Title}
+                      />
+                      <h1>{movie.Title}</h1>
+                      <Link href={`/movies/${movie.imdbID}`}>Go To Movie</Link>
+                    </div>
+                  </div>
+                ))}
             </div>
-          ))}
-        <button onClick={() => setPageIndex(pageIndex - 1)}>Previous</button>
-        <button onClick={() => setPageIndex(pageIndex + 1)}>Next</button>
+            <button onClick={() => setPageIndex(pageIndex - 1)}>
+              Previous
+            </button>
+            <button onClick={() => setPageIndex(pageIndex + 1)}>Next</button>
+          </div>
+        </div>
       </div>
-    </div>
+    </>
   );
 }
-
-export const getStaticProps = async () => {
-  const response = await fetch(
-    `http://www.omdbapi.com/?apikey=83d16d20&s=batman`
-  );
-
-  const data = await response.json();
-  return {
-    props: { movie: data },
-  };
-};
