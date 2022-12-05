@@ -1,10 +1,17 @@
+/* eslint-disable @next/next/no-html-link-for-pages */
 /* eslint-disable @next/next/no-img-element */
 /* eslint-disable react-hooks/rules-of-hooks */
 
 export default function index(props) {
   return (
-    <div className="flex justify-center items-center md:h-screen">
+    <div className="flex md:flex-col justify-center items-center md:h-screen">
       <div className="text-slate-300 flex flex-col w-[970px] bg-gradient-to-b from-indigo-900 md:rounded-t-3xl  p-4 md:flex-row md:space-x-10 ">
+        <a
+          href="/"
+          className="mb-5 flex flex-row font-bold bg-slate-400/20 hover:bg-slate-400/50 transition-all h-fit px-3 py-2 rounded-md md:w-[150px] w-fit "
+        >
+          ← Home
+        </a>
         <div className="mb-4">
           {props.Poster === "N/A" ? (
             <img
