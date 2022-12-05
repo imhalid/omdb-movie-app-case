@@ -1,34 +1,50 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# OMDB Movie App Case
+[Preview Link](https://omdb-movie-app-case.vercel.app/)
 
-## Getting Started
+[Codespace Link](https://github.dev/imhalid/omdb-movie-app-case)
 
-First, run the development server:
+### Screenshots
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+<table>
+  <tr>
+    <th>Desktop Home</th>
+    <th>Desktop Detail</th>
+    <th>Mobile Home</th>
+    <th>Mobile Detail</th>
+  </tr>
+  <tr>
+    <td><img src="https://user-images.githubusercontent.com/40598819/205709077-456dcedb-428e-4f38-ab29-0c15372d02fd.png" alt="Desktop Home" /></td>
+    <td><img src="https://user-images.githubusercontent.com/40598819/205708825-5322c70c-8a94-4a48-963e-b1a086f6c5b8.png" alt="Desktop Detail" /></td>
+    <td><img src="https://user-images.githubusercontent.com/40598819/205710019-522395ac-c8e0-45fe-a413-fc37313fc688.png" alt="Mobile Home" /></td>
+    <td><img src="https://user-images.githubusercontent.com/40598819/205710035-17a81bb7-351b-494d-adb4-f96de06b7b49.png" alt="Mobile Detail" /></td>
+  </tr>
+</table>
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Libraries/Tools
+- [Next.js](https://nextjs.org/)
+- [TailwindCSS](https://tailwindcss.com/)
+- [SWR](https://swr.vercel.app/)
+- [react-paginate](https://github.com/AdeleD/react-paginate)
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+## Why i use this?
+ **Next.js**: I used Next.js to create a dynamic page structure. For more information, visit [Link](https://nextjs.org/docs/routing/dynamic-routes).
+ 
+ **TailwindCSS**: The reason I use Tailwindcss is to produce designs more quickly and easily. With Tailwindcss, I can rapidly create clean, responsive layouts and user interfaces without having to write a lot of custom CSS. 
+ 
+ **SWR**: I use SWR to improve the performance and user experience of my application by fetching and caching data in a flexible and efficient way.
+ 
+ **react-paginate**: react-paginate is a small, easy-to-use pagination component for React applications. It allows developers to easily add pagination functionality to their React components, allowing users to browse large datasets by dividing them into multiple pages.
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+## Install
 
-## Learn More
+1. Fork tis repo
+2. `npm install`
+3. `npm run dev`
 
-To learn more about Next.js, take a look at the following resources:
+## Author
+- Author - [Halit]
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+_All codes belong to me_
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+⌛ Happy Coding ✍
