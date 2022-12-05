@@ -11,22 +11,59 @@ export default function index(props) {
   }
 
   return (
-    <div>
-      {props.Actors}
-      <p>{props.Title}</p>
-      <p>{props.Year}</p>
-      <p>{props.Plot}</p>
-      <p>{props.Director}</p>
-      <p>{props.Genre}</p>
-      <p>{props.Language}</p>
-      <p>{props.Country}</p>
-      <p>{props.Awards}</p>
-      <p>{props.imdbRating}</p>
-      <p>{props.imdbVotes}</p>
-      <p>{props.imdbID}</p>
-      <p>{props.Type}</p>
-      <p>{props.DVD}</p>
-      <img src={props.Poster} alt={props.Title} />
+    <div className="flex justify-center items-center md:h-screen">
+      <div className="text-slate-300 flex flex-col w-[970px] p-4 md:flex-row md:space-x-10 ">
+        <div className="mb-4">
+          {props.Poster === "N/A" ? (
+            <img
+              className="rounded-md shadow-md scale-50  bg-center sm:w-[200px] opacity-20 w-[250px] sm:h-[250px] h-[220px] object-fit "
+              src="/film.svg"
+              alt={props.Title}
+            />
+          ) : (
+            <img
+              className="rounded-2xl md:w-[800px] shadow-md  object-cover"
+              src={props.Poster}
+              alt={props.Title}
+            />
+          )}
+        </div>
+
+        <div className="space-y-3 text-lg">
+          <p className="font-bold text-2xl">{props.Title}</p>
+          <p className="mt-2">{props.Plot}</p>
+          <div className="flex items-center text-amber-500 w-fit px-2 py-1  bg-black/60 font-bold rounded-lg overflow-clip backdrop-blur-lg">
+            <img src="/star.svg" />
+            <span className="ml-2">{props.imdbRating}</span>
+          </div>
+          <p className="capitalize">
+            <span className="font-bold">Type: </span>
+            {props.Type}
+          </p>
+          <p>
+            <span className="font-bold">Release date:</span> {props.Year}
+          </p>
+          <p>
+            <span className="font-bold">Run time: </span> {props.Runtime}
+          </p>
+          <p>
+            <span className="font-bold">Genre: </span>
+            {props.Genre}
+          </p>
+          <p>
+            <span className="font-bold">Language: </span>
+            {props.Language}
+          </p>
+          <p>
+            <span className="font-bold">Country: </span>
+            {props.Country}
+          </p>
+          <p>
+            <span className="font-bold">Director: </span>
+            {props.Director}
+          </p>
+        </div>
+      </div>
     </div>
   );
 }

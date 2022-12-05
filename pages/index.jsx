@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import { Tab } from "@headlessui/react";
 import useSWR from "swr";
+import useSWRInfinite from "swr/infinite";
 import ReactPaginate from "react-paginate";
 
 export default function Home(props) {
@@ -93,7 +94,7 @@ export default function Home(props) {
               ({data.totalResults === undefined ? "0" : data.totalResults})
             </span>
           </p>
-          <div className="grid justify-items-center grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-4">
+          <div className="grid  grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-4">
             {data.Search &&
               data.Search.filter((d) => {
                 if (categories.length === 0) {
