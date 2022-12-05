@@ -63,7 +63,7 @@ export default function index(props) {
 }
 
 export async function getStaticPaths() {
-  const res = await fetch(`http://www.omdbapi.com/?apikey=83d16d20&s=yoyo`);
+  const res = await fetch(`https://www.omdbapi.com/?apikey=83d16d20&s=yoyo`);
   const data = await res.json();
   return {
     paths: data.Search.map((d) => ({ params: { id: d.imdbID } })),
@@ -73,7 +73,7 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ params }) {
   const res = await fetch(
-    `http://www.omdbapi.com/?apikey=83d16d20&i=${params.id}&plot=full`
+    `https://www.omdbapi.com/?apikey=83d16d20&i=${params.id}&plot=full`
   );
   const data = await res.json();
   return {

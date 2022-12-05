@@ -13,7 +13,7 @@ export default function Home() {
 
   const fetcher = (url) => fetch(url).then((res) => res.json());
   const { data } = useSWR(
-    `http://www.omdbapi.com/?apikey=83d16d20&s=${searchValue}&page=${pageIndex}&type=${categories}`,
+    `https://www.omdbapi.com/?apikey=83d16d20&s=${searchValue}&page=${pageIndex}&type=${categories}`,
     fetcher
   );
 
