@@ -1,3 +1,12 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+#__next
+  > div
+  > div
+  > div
+  > ul
+  > li.previous.bg-blue-500.cursor-context-menu
+  > a {
+  cursor: default;
+}

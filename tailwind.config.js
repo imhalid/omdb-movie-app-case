@@ -11,8 +11,10 @@ module.exports = {
       },
       backgroundImage: {
         "hero-pattern": "url('/Background.svg')",
+        search: "url('/search.svg')",
+        film: "url('/film.svg')",
       },
     },
   },
-  plugins: [],
+  plugins: [require("@headlessui/tailwindcss")],
 };

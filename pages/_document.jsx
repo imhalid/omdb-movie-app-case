@@ -12,7 +12,7 @@ export default function Document() {
         />
       </Head>
       <body
-        className="bg-hero-pattern bg-cover bg-center bg-no-repeat bg-slate-900  h-screen
+        className=" bg-[#121829]  h-screen
        selection:bg-blue-100/30 selection:text-blue-500
        "
       >
