@@ -38,7 +38,7 @@
 
 ## Install
 
-1. Fork tis repo
+1. Fork this repo
 2. `npm install`
 3. `npm run dev`
 
